@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Google</title>
+    <style>
+      * {
+        margin: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: rgb(253, 253, 253);
+      }
+      .top-nav {
+        margin: 0.8rem 2rem;
+      }
+      ul.nav {
+        text-align: right;
+        word-spacing: 0.8rem;
+      }
+      li {
+        list-style: none;
+        display: inline;
+        font-size: 0.8rem;
+      }
+      a {
+        text-decoration: none;
+        color: rgb(44, 44, 44);
+      }
+      div.google {
+        margin-top: 4rem;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        font-size: 4.8rem;
+        font-weight: 500;
+      }
+      .g1 {
+        color: #4384f4;
+        font-size: 5.8rem;
+      }
+      .o2 {
+        color: #ea4435;
+      }
+      .o3 {
+        color: #fbbc04;
+      }
+      .g4 {
+        color: #4384f4;
+      }
+      .l5 {
+        color: #34a854;
+      }
+      .e6 {
+        color: #ea4435;
+      }
+      .searchContainer {
+        margin: 1rem auto;
+        text-align: center;
+      }
+      #searchText {
+        background-image: url("../images/search-icon-small-png.png"),
+          url("../images/GoogleMike.png");
+        background-size: 0.9rem;
+        background-repeat: no-repeat;
+        background-position: 3% 50%, 97% 50%;
+        width: 30rem;
+        height: 2.8rem;
+        border: 1px solid rgb(212, 212, 212);
+        border-radius: 1.6rem;
+        padding: 10px;
+      }
+      .ham {
+        color: rgb(168, 168, 168);
+      }
+      .btnSearch {
+        margin: 0 0.4rem;
+        border: 1px solid rgb(230, 230, 230);
+        border-radius: 2px;
+        padding: 0.5rem 1rem;
+        color: rgb(99, 99, 99);
+      }
+      .langContainer {
+        margin-top: 1.6rem;
+        font-size: 0.825rem;
+      }
+      .langLbl {
+        padding-right: 0.4rem;
+      }
+      .lang {
+        padding-right: 0.4rem;
+        color: rgb(0, 0, 199);
+      }
+      .footer {
+        margin-top: 40vh;
+        color: rgb(99, 99, 99);
+        background-color: #f2f2f2;
+      }
+      .foot-country {
+        border: 1px solid rgb(221, 221, 221);
+        padding: 1rem 2rem;
+      }
+      .foot-nav {
+        padding: 1rem 2rem;
+      }
+      .foot-nav li a {
+        font-size: 0.875rem;
+        color: rgb(99, 99, 99);
+        padding-right: 1.4rem;
+      }
+      .foot-nav li.right {
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-nav">
+      <ul class="nav">
+        <li><a href="">Gmail</a></li>
+        <li><a href="">Images</a></li>
+        <li><a href="">Burger</a></li>
+        <li>
+          <a href=""
+            ><img
+              class="ham"
+              src="../images/noun_Bento Menu_756729.png"
+              width="25"
+          /></a>
+        </li>
+        <li><a href="">Icon</a></li>
+      </ul>
+    </div>
+    <br />
+    <center>
+      <div class="google">
+        <span class="g1">G</span><span class="o2">o</span
+        ><span class="o3">o</span><span class="g4">g</span
+        ><span class="l5">l</span><span class="e6">e</span>
+      </div>
+      <div class="searchContainer">
+        <input type="text" id="searchText" />
+      </div>
+      <br />
+      <div class="btnContainer">
+        <input class="btnSearch" type="button" value="Google Search" />
+        <input class="btnSearch" type="button" value="I'm Feeling Lucky" />
+      </div>
+      <div class="langContainer">
+        <label class="langLbl">Google offered in:</label>
+        <span>
+          <a class="lang" href="">हिन्दी</a>
+          <a class="lang" href="">বাংলা</a>
+          <a class="lang" href="">తెలుగు</a>
+          <a class="lang" href="">मराठी</a>
+          <a class="lang" href="">தமிழ்</a>
+          <a class="lang" href="">ગુજરાતી</a>
+          <a class="lang" href="">ಕನ್ನಡ</a>
+          <a class="lang" href="">മലയാളം</a>
+          <a class="lang" href="">ਪੰਜਾਬੀ</a>
+        </span>
+      </div>
+    </center>
+    <br />
+    <footer>
+      <div class="footer">
+        <div class="foot-country">
+          <p>India</p>
+        </div>
+        <ul class="foot-nav">
+          <li class="left"><a href="">Advertising</a></li>
+          <li class="left"><a href="">Business</a></li>
+          <li class="left"><a href="">About</a></li>
+          <li class="left"><a href="">How Search Works</a></li>
+          <li class="right"><a href="">Privacy</a></li>
+          <li class="right"><a href="">Terms</a></li>
+          <li class="right"><a href="">Settings</a></li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>
