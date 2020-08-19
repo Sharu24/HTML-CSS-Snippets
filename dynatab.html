@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Dynamic Table</title>
+    <style>
+      body {
+        background: linear-gradient(
+            rgba(255, 255, 255, 0.5),
+            rgba(255, 255, 255, 0.5)
+          ),
+          url("../images/Background.png") no-repeat center;
+      }
+      div {
+        margin: 10vh auto;
+      }
+      h1 {
+        text-align: center;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        color: rgb(0, 112, 116);
+      }
+      table {
+        box-shadow: 1px 2px 10px rgb(196, 212, 212),
+          1px -2px 10px rgb(217, 233, 233), -1px 2px 5px rgb(211, 229, 229),
+          -1px -2px 10px rgb(215, 235, 235);
+      }
+      table,
+      tr,
+      td {
+        padding: 5px;
+        text-align: center;
+        border: 1px solid rgb(196, 194, 194);
+        border-radius: 5px;
+        margin: 0 auto;
+      }
+      td {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        text-shadow: grey;
+        background-color: rgb(179, 252, 255);
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>Mine Sweeper</h1>
+    </div>
+    <script>
+      function createElement(ele) {
+        return document.createElement(ele);
+      }
+
+      function markSiblings(sibling) {
+        console.log("Mark Siblings", sibling);
+        sibling.forEach(ele => {
+          td = document.getElementById(ele);
+          td.innerText = "**";
+          td.innerHTML =
+            '<img src="./images/pow1.png" height="28px" width="28px">';
+        });
+      }
+
+      function clearMarkings(sibling) {
+        console.log("Clear markings", sibling);
+        sibling.forEach((ele, index) => {
+          console.log(document.getElementById(ele).innerText, ele, index);
+          var td = document.getElementById(ele);
+          td.innerText = ele;
+          td.style.backgroundColor = "rgb(179, 252, 255);";
+        });
+      }
+
+      window.addEventListener("DOMContentLoaded", event => {
+        console.log("DOM Fully Loaded and Parsed");
+        // var bdy = document.querySelector("body");
+        var div = document.querySelector("div");
+        var h1 = document.querySelector("h1");
+
+        var msize = 10,
+          sibling = [];
+
+        var tbl = createElement("table");
+        div.appendChild(tbl);
+
+        h1.addEventListener("click", () => {
+          if (sibling.length) {
+            clearMarkings(sibling);
+          }
+        });
+
+        for (var i = 1; i <= msize * msize; i++) {
+          if (i % msize === 1) {
+            var tr = createElement("tr");
+          }
+          tbl.appendChild(tr);
+          var td = createElement("td");
+          td.innerText = i;
+          td.id = i;
+          td.style.height = "32px";
+          td.style.width = "32px";
+
+          // td.style.backgroundColor = "yellow";
+          tr.appendChild(td);
+        }
+        var userSelTd = document.querySelectorAll("td");
+        //console.log(userSelTd);
+
+        userSelTd.forEach(td => {
+          td.addEventListener("click", () => {
+            if (sibling.length) {
+              clearMarkings(sibling);
+            }
+
+            //console.log(td.innerText);
+            var userSel = td.innerText;
+
+            sibling = [];
+            for (i = 1; i <= msize * msize; i++) {
+              if (userSel * i <= 100) {
+                sibling.push(userSel * i);
+              }
+            }
+            markSiblings(sibling);
+            //console.log(sibling);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
