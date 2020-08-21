@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Generates a Sequence
+      function genSeq(n) {
+        var arr = [];
+        for (var i = 1; i <= n; i++) arr.push(i);
+        return arr;
+      }
+
+      // Random Number Generation with duplicates
+      function genRan(n) {
+        var arr = [];
+        while (n > 1) arr.push(Math.floor(Math.random() * n--));
+        return arr;
+      }
+
+      // Generates a Random shuffle for a given input array
+      function shuffle1(arr) {
+        var randomIndex, randomNum;
+        size = arr.length;
+        while (size > 1) {
+          randomIndex = Math.floor(Math.random() * size);
+          randomNum = parseInt(arr.splice(randomIndex, 1).join());
+          arr.push(randomNum);
+          size--;
+        }
+        return arr;
+      }
+
+      // Compress shuffle1()
+      function shuffle2(arr) {
+        var num,
+          n = arr.length;
+        while (n > 1) {
+          num = Math.floor(Math.random() * n--);
+          arr.push(parseInt(arr.splice(num, 1).join()));
+        }
+        return arr;
+      }
+
+      // Compress shuffle2()
+      function shuffle3(arr) {
+        var size = arr.length;
+        while (size > 1)
+          arr.push(
+            parseInt(arr.splice(Math.floor(Math.random() * size--), 1).join())
+          );
+        return arr;
+      }
+
+      window.addEventListener("DOMContentLoaded", event => {
+        var res1 = genRan(100);
+        console.log("res1 = ", res1);
+
+        var res2 = genSeq(100);
+        console.log("res2 = ", res2);
+
+        var res3 = shuffle1([1, 2, 3, 4, 5]);
+        console.log("res3 = ", res3);
+
+        var res4 = shuffle3(genSeq(100));
+        console.log("res4 = ", res4);
+      });
+    </script>
+  </body>
+</html>

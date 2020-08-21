@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      .rectangle {
+        height: 100px;
+        width: 200px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="rectangle" id="rectangle"></div>
+    <div class="me"></div>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        // console.log(
+        //   "getComputedStyle<>.width = ",
+        //   getComputedStyle(document.querySelector(".rectangle")).width
+        // );
+        // console.log(
+        //   "<>.style.width = ",
+        //   document.querySelector(".rectangle").style.width
+        // );
+        function enlarge() {
+          var intervalId = setInterval(() => {
+            var ele = document.querySelector(".rectangle");
+            var style = getComputedStyle(ele);
+            console.log(style.width);
+            console.log(ele.style.width);
+            var w = Number(style.width.split("px")[0]) + 2;
+            var h = Number(style.height.split("px")[0]) + 1;
+
+            if (w <= 400) {
+              document.querySelector(".rectangle").style.width = `${w}px`;
+              document.querySelector(".rectangle").style.height = `${h}px`;
+              console.log(w, h);
+            } else {
+              clearInterval(intervalId);
+            }
+            console.log("---Setapai---");
+          }, 50);
+        }
+        enlarge();
+      });
+    </script>
+  </body>
+</html>

@@ -65,6 +65,10 @@
       <h1>Mine Sweeper</h1>
     </div>
     <script>
+      var msize = 12,
+        sibling = [];
+      var mcount = msize * msize;
+
       function createElement(ele) {
         return document.createElement(ele);
       }
@@ -74,19 +78,62 @@
         sibling.forEach(ele => {
           td = document.getElementById(ele);
           // td.innerText = "**";
-          td.innerHTML =
-            '<img src="./images/pow1.png" height="28px" width="28px">';
+          if (td)
+            td.innerHTML =
+              '<img src="./images/pow1.png" height="28px" width="28px">';
         });
       }
 
       function clearMarkings(sibling) {
-        console.log("Clear markings", sibling);
+        // console.log("Clear markings", sibling);
         sibling.forEach((ele, index) => {
-          console.log(document.getElementById(ele).innerText, ele, index);
+          // console.log(document.getElementById(ele).innerText, ele, index);
           var td = document.getElementById(ele);
-          td.innerText = ele;
-          td.style.backgroundColor = "rgb(179, 252, 255);";
+          if (td) {
+            td.innerText = ele;
+            td.style.backgroundColor = "rgb(179, 252, 255);";
+          }
         });
+      }
+
+      function handleNumClick(td) {
+        // console.log(sibling);
+        if (sibling.length) {
+          clearMarkings(sibling);
+        }
+        var audioElement = new Audio("../media/SQUISH11.mp3");
+        audioElement.volume = 0.1;
+        audioElement.play();
+
+        //console.log(td.innerText);
+        var userSel = td;
+
+        console.log("userSel = ", userSel);
+
+        sibling = [];
+        for (i = 1; i <= mcount; i++) {
+          if (userSel * i <= mcount) {
+            sibling.push(userSel * i);
+          }
+        }
+        console.log("before calling markSibling", sibling);
+        markSiblings(sibling);
+        //console.log(sibling);
+      }
+
+      function genSeq(n) {
+        var arr = [];
+        for (var i = 1; i <= n; i++) arr.push(i);
+        return arr;
+      }
+
+      function shuffle(arr) {
+        var size = arr.length;
+        while (size > 1)
+          arr.push(
+            parseInt(arr.splice(Math.floor(Math.random() * size--), 1).join())
+          );
+        return arr;
       }
 
       window.addEventListener("DOMContentLoaded", event => {
@@ -94,9 +141,6 @@
         // var bdy = document.querySelector("body");
         var div = document.querySelector("div");
         var h1 = document.querySelector("h1");
-
-        var msize = 10,
-          sibling = [];
 
         var tbl = createElement("table");
         div.appendChild(tbl);
@@ -107,45 +151,27 @@
           }
         });
 
-        for (var i = 1; i <= msize * msize; i++) {
+        for (var i = 1; i <= mcount; i++) {
           if (i % msize === 1) {
             var tr = createElement("tr");
           }
           tbl.appendChild(tr);
           var td = createElement("td");
-          td.innerText = i;
-          td.id = i;
+          var rand = Math.floor(Math.random() * mcount);
+          td.innerText = rand;
+          td.id = rand;
           td.style.height = "32px";
           td.style.width = "32px";
 
           // td.style.backgroundColor = "yellow";
           tr.appendChild(td);
-        }
-        var userSelTd = document.querySelectorAll("td");
-        //console.log(userSelTd);
 
-        userSelTd.forEach(td => {
-          td.addEventListener("click", () => {
-            if (sibling.length) {
-              clearMarkings(sibling);
-            }
-            var audioElement = new Audio("../media/SQUISH11.mp3");
-            audioElement.volume = 0.1;
-            audioElement.play();
-
-            //console.log(td.innerText);
-            var userSel = td.innerText;
-
-            sibling = [];
-            for (i = 1; i <= msize * msize; i++) {
-              if (userSel * i <= 100) {
-                sibling.push(userSel * i);
-              }
-            }
-            markSiblings(sibling);
-            //console.log(sibling);
+          td.addEventListener("click", event => {
+            handleNumClick(event.currentTarget.id);
           });
-        });
+        }
+        //var userSelTd = document.querySelectorAll("td");
+        //console.log(userSelTd);
       });
     </script>
   </body>

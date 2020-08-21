@@ -65,6 +65,10 @@
       <h1>Mine Sweeper</h1>
     </div>
     <script>
+      var msize = 12,
+        sibling = [];
+      var mcount = msize * msize;
+
       function createElement(ele) {
         return document.createElement(ele);
       }
@@ -80,13 +84,38 @@
       }
 
       function clearMarkings(sibling) {
-        console.log("Clear markings", sibling);
+        // console.log("Clear markings", sibling);
         sibling.forEach((ele, index) => {
-          console.log(document.getElementById(ele).innerText, ele, index);
+          // console.log(document.getElementById(ele).innerText, ele, index);
           var td = document.getElementById(ele);
           td.innerText = ele;
           td.style.backgroundColor = "rgb(179, 252, 255);";
         });
+      }
+
+      function handleNumClick(td) {
+        // console.log(sibling);
+        if (sibling.length) {
+          clearMarkings(sibling);
+        }
+        var audioElement = new Audio("../media/SQUISH11.mp3");
+        audioElement.volume = 0.1;
+        audioElement.play();
+
+        //console.log(td.innerText);
+        var userSel = td;
+
+        console.log("userSel = ", userSel);
+
+        sibling = [];
+        for (i = 1; i <= mcount; i++) {
+          if (userSel * i <= mcount) {
+            sibling.push(userSel * i);
+          }
+        }
+        console.log("before calling markSibling", sibling);
+        markSiblings(sibling);
+        //console.log(sibling);
       }
 
       window.addEventListener("DOMContentLoaded", event => {
@@ -94,9 +123,6 @@
         // var bdy = document.querySelector("body");
         var div = document.querySelector("div");
         var h1 = document.querySelector("h1");
-
-        var msize = 10,
-          sibling = [];
 
         var tbl = createElement("table");
         div.appendChild(tbl);
@@ -107,7 +133,7 @@
           }
         });
 
-        for (var i = 1; i <= msize * msize; i++) {
+        for (var i = 1; i <= mcount; i++) {
           if (i % msize === 1) {
             var tr = createElement("tr");
           }
@@ -120,32 +146,13 @@
 
           // td.style.backgroundColor = "yellow";
           tr.appendChild(td);
-        }
-        var userSelTd = document.querySelectorAll("td");
-        //console.log(userSelTd);
 
-        userSelTd.forEach(td => {
-          td.addEventListener("click", () => {
-            if (sibling.length) {
-              clearMarkings(sibling);
-            }
-            var audioElement = new Audio("../media/SQUISH11.mp3");
-            audioElement.volume = 0.1;
-            audioElement.play();
-
-            //console.log(td.innerText);
-            var userSel = td.innerText;
-
-            sibling = [];
-            for (i = 1; i <= msize * msize; i++) {
-              if (userSel * i <= 100) {
-                sibling.push(userSel * i);
-              }
-            }
-            markSiblings(sibling);
-            //console.log(sibling);
+          td.addEventListener("click", event => {
+            handleNumClick(event.currentTarget.id);
           });
-        });
+        }
+        //var userSelTd = document.querySelectorAll("td");
+        //console.log(userSelTd);
       });
     </script>
   </body>
